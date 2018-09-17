@@ -1,3 +1,3 @@
-# capstone1-TheProject
+# OpenHPI Course - Java Capstone Series Pt. 1 - Team Peer Assessment - Team #40
 
-Some very basic structure to get started with the game.
+A "BreakOut" type game written in Java.
