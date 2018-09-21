@@ -11,6 +11,7 @@ public abstract class AbstractView {
 		this.display = display;
 		subject.attach(this);
 	}
-
+	public abstract void update(float x, float y, float r);
+	public abstract void update(Object x);
 	public abstract void update();
 }
