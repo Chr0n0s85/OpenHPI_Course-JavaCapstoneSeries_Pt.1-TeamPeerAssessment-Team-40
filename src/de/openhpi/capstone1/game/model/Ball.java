@@ -13,11 +13,11 @@ public class Ball implements Subject{
 	private float yPos = 50;
 	private int maxWidth = 100;
 	private int maxHeight = 100;
-	private double xSpeed = 2.2;
-	private double ySpeed = 2.8;
+	private double xSpeed = 4;
+	private double ySpeed = 5;
 	private int xDirection = 1;
 	private int yDirection = 1;
-	
+	private Counter counter;
 	private float[] Pos = {xPos,yPos};
 	
 	
@@ -49,6 +49,9 @@ public class Ball implements Subject{
 		this.yPos = yPos;
 		notifyAllViews();
 	}
+	public void setCounter(Counter c) {
+		this.counter = c;
+	}
 	public void freefly(){
 		  xPos = xPos + ( (float)xSpeed * xDirection );
 		  yPos = yPos + ( (float)ySpeed * yDirection );
@@ -58,9 +61,19 @@ public class Ball implements Subject{
 		  if (xPos > maxWidth-rad || xPos < rad) {
 		    xDirection *= -1;
 		  }
-		  if (yPos > maxHeight-rad || yPos < rad) {
+		  if (yPos < rad) {
 		    yDirection *= -1;
 		  }		
+		  if (yPos > maxHeight-rad) {
+			  // game over!!
+		  }
+			  
+		  
+		  // hits counter
+		  if (yPos+rad >= 950 && xPos-rad >= counter.getxPos() && xPos-rad <= counter.getxPos()+counter.getlength()) {
+			  yDirection *= -1;
+		  }
+			 
 		  notifyAllViews();
 	}
 	
