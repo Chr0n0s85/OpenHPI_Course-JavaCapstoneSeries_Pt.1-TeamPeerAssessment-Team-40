@@ -10,14 +10,19 @@ public class BallView extends AbstractView{
 			super(display, subject);
 			update();
 		}
-		public void update(float x, float y, float r) {
+		public void update(float x, float y, float ra, float rb) {
 			display.fill(10);
-			display.ellipse(x, y, r, r);
+			display.ellipse(x, y, ra, rb);
 			this.update();
 		}
 		public void update(Object x) {
-			Ball ball = (Ball)x;
-			
+			Ball ball = new Ball(); 
+			try {
+			ball = (Ball)x;
+			}
+			catch(ClassCastException e) {
+				System.out.println(e.getMessage());
+			}			
 			display.fill(10);
 			display.ellipse(ball.getXPos(), ball.getYPos(), ball.getrad(), ball.getrad());
 			this.update();

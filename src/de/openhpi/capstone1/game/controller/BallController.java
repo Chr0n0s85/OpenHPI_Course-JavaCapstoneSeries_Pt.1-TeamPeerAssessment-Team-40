@@ -8,7 +8,6 @@ public class BallController implements Controller {
 		this.ball = ball;
 	}
 
-	
 	public void handleEvent() {
 		ball.freefly();	
 	}

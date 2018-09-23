@@ -1,6 +1,7 @@
 package de.openhpi.capstone1.game.starter;
 
 import processing.core.PApplet;
+
 import de.openhpi.capstone1.game.model.*;
 import de.openhpi.capstone1.game.view.*;
 import de.openhpi.capstone1.game.controller.*;
@@ -25,7 +26,7 @@ public class TheApp extends PApplet {
 	@Override
 	public void setup() {  // setup() runs once
 		noStroke();
-		frameRate(30);
+		frameRate(60);
 		counter = new Counter();
 		counter.setxPos(10);
 		counterController = new CounterController(counter);
@@ -37,22 +38,16 @@ public class TheApp extends PApplet {
 		ball.setCounter(counter);
 		ballController = new BallController(ball);
 		ballView = new BallView(this,ball);
-
 	}
 
 	@Override
 	public void draw() {  // draw() loops forever, until stopped
-		background(205);
+		background(205);  // removes existing drawing and produces a plain background 
 		ballController.handleEvent();
 		counterController.handleEvent();
 	}
 	
 	//Add further user interaction as necessary
-	@Override
-	public void mouseClicked() {
-		ball.setxSpeed(4);
-		ball.setySpeed(5);
-	}
 	public void keyPressed() {
 		if (key != CODED) {return;}
 
@@ -63,4 +58,9 @@ public class TheApp extends PApplet {
 	    	counterController.moveRight();
 	    } 
 	}
+	public void keyReleased() {
+		if (keyCode == LEFT || keyCode == RIGHT) {
+	    	counterController.stop();
+	    } 
+	}	
 }
