@@ -11,14 +11,13 @@ public class Ball implements Subject{
 	private float rad = 20;
 	private float xPos = 50;
 	private float yPos = 50;
-	private int maxWidth = 100;
-	private int maxHeight = 100;
+	private float maxWidth = 100;
+	private float maxHeight = 100;
 	private double xSpeed = 4;
 	private double ySpeed = 5;
 	private int xDirection = 1;
 	private int yDirection = 1;
 	private Counter counter;
-	private float[] Pos = {xPos,yPos};
 	
 	
 	private List<AbstractView> AbstractViews = new ArrayList<AbstractView>();
@@ -53,8 +52,8 @@ public class Ball implements Subject{
 		this.counter = c;
 	}
 	public void freefly(){
-		  xPos = xPos + ( (float)xSpeed * xDirection );
-		  yPos = yPos + ( (float)ySpeed * yDirection );
+		  xPos = xPos + ( (float)xSpeed * (float)xDirection );
+		  yPos = yPos + ( (float)ySpeed * (float)yDirection );
 		  
 		  // Test to see if the shape exceeds the boundaries of the screen
 		  // If it does, reverse its direction by multiplying by -1
@@ -67,13 +66,11 @@ public class Ball implements Subject{
 		  if (yPos > maxHeight-rad) {
 			  // game over!!
 		  }
-			  
-		  
+
 		  // hits counter
-		  if (yPos+rad >= 950 && xPos-rad >= counter.getxPos() && xPos-rad <= counter.getxPos()+counter.getlength()) {
+		  if (yPos+rad >= counter.getyPos() && xPos-rad >= counter.getxPos() && xPos-rad <= counter.getxPos()+counter.getlength()) {
 			  yDirection *= -1;
-		  }
-			 
+		  }			 
 		  notifyAllViews();
 	}
 	
@@ -85,7 +82,7 @@ public class Ball implements Subject{
 	@Override
 	public void notifyAllViews() {
 		for (AbstractView AbstractView : AbstractViews) {
-			AbstractView.update(xPos,yPos,rad);
+			AbstractView.update(xPos,yPos,rad,rad);
 		}
 	}
 }
