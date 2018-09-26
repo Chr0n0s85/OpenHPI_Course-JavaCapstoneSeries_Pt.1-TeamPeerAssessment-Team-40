@@ -9,11 +9,13 @@ import de.openhpi.capstone1.game.view.AbstractView;
 public class Counter implements Subject {
 
 	private int xPos = 0;
-	private int yPos = 950;
-	private int length = 200;
-	private int height = 15;
-	private int speed = 10;
+	private int yPos = 900;
+	private int length = 180;
+	private int height = 25;
+	private int speed = 12;
 	private int direction = 0; // 0 = stop, 1 = right, -1 = left
+	private int maxX = 1000;
+	private int minX = 0;
 	
 	private List<AbstractView> AbstractViews = new ArrayList<AbstractView>();
 	// get Methods
@@ -25,7 +27,9 @@ public class Counter implements Subject {
 	public int getdirection() {return direction;}
 	// set Methods, only for writable properties
 	public void setxPos(int x) {
-		this.xPos = x;
+		if ((x <= maxX-length) & (x >= minX)) {
+			this.xPos = x;	
+		}
 		notifyAllViews();
 	}
 	public void setdirection(int d) {

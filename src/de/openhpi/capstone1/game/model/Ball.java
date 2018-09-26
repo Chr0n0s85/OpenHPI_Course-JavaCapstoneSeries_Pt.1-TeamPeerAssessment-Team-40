@@ -9,12 +9,12 @@ import de.openhpi.capstone1.game.view.AbstractView;
 
 public class Ball implements Subject{
 	private float rad = 20;
-	private float xPos = 50;
-	private float yPos = 50;
+	private float xPos = 500;
+	private float yPos = 500;
 	private float maxWidth = 100;
 	private float maxHeight = 100;
-	private double xSpeed = 4;
-	private double ySpeed = 5;
+	private double xSpeed = -6;
+	private double ySpeed = -7;
 	private int xDirection = 1;
 	private int yDirection = 1;
 	private Counter counter;
@@ -64,8 +64,13 @@ public class Ball implements Subject{
 		    yDirection *= -1;
 		  }		
 		  if (yPos > maxHeight-rad) {
-			  // game over!!
+			  setPos(500,400);
+			  setySpeed(-this.ySpeed);
+			  // Repositions the Ball to the center
 		  }
+		  
+		  if(Block.checkCollisions((int)xPos, (int)yPos))
+			  yDirection *= -1;
 
 		  // hits counter
 		  if (yPos+rad >= counter.getyPos() && xPos-rad >= counter.getxPos() && xPos-rad <= counter.getxPos()+counter.getlength()) {

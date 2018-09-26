@@ -4,6 +4,10 @@ import processing.core.PApplet;
 
 import de.openhpi.capstone1.game.model.*;
 import de.openhpi.capstone1.game.view.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import de.openhpi.capstone1.game.controller.*;
 
 public class TheApp extends PApplet {
@@ -18,6 +22,9 @@ public class TheApp extends PApplet {
 	private AbstractView counterView;
 	private CounterController counterController;
 	
+	private List<AbstractView> blockView;
+	private BlockController blockController;
+	
 	@Override
 	public void settings() {
 		size(maxWidth, maxHeight);
@@ -31,7 +38,14 @@ public class TheApp extends PApplet {
 		counter.setxPos(10);
 		counterController = new CounterController(counter);
 		counterView = new CounterView(this,counter);
+		
+		blockView = new ArrayList<AbstractView>();
+		for(int i = 0; i < 15; i++)
+			for(int j = 0; j < 5; j++)
+				blockView.add(new BlockView(this,Block.addBlock(50+60*i, 200+j*30)));
 
+		blockController = new BlockController();
+		
 		ball = new Ball();
 		ball.setmaxHeight(maxHeight);
 		ball.setmaxWidth(maxWidth);
@@ -45,6 +59,7 @@ public class TheApp extends PApplet {
 		background(205);  // removes existing drawing and produces a plain background 
 		ballController.handleEvent();
 		counterController.handleEvent();
+		blockController.handleEvent();
 	}
 	
 	//Add further user interaction as necessary
